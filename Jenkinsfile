@@ -53,17 +53,24 @@ pipeline{
                 )
             }
      
-        }
-         stage('Unit Testing'){
-            steps{
-              echo "Running Units Test";
- 
          }
+        stage('Unit Testing'){
+            when {
+                branch 'developer'
+              }
+             steps{
+              echo "Running Units Test";
+          }
+             
          stage('Code Analisis'){
             steps{
               echo "Running Code Analisis";
           }
+             
           stage('Build Deploy Code'){
+              when {
+                branch 'developer'
+              }
             steps{
               echo "Running Building Artifact";
               echo "Deploying Code;"
